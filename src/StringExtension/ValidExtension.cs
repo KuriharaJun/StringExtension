@@ -40,7 +40,7 @@ namespace StringExtension
          /// </summary>
          /// <param name="source">Validating value</param>
          /// <returns>Result of alphabet validation</returns>
-        public static bool IsAlphabet(this string source)
+        public static bool IsAlphabetOnly(this string source)
         {
             if (string.IsNullOrEmpty(source))
                 return false;

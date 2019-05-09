@@ -40,9 +40,9 @@ namespace StringExtension.Tests
         [InlineData("zz")]
         [InlineData("AA")]
         [InlineData("ZZ")]
-        public void IsAlphabetSuccess(string source)
+        public void IsAlphabetOnlySuccess(string source)
         {
-            Assert.True(source.IsAlphabet(), $"source is {source}");
+            Assert.True(source.IsAlphabetOnly(), $"source is {source}");
         }
 
         [Theory]
@@ -55,9 +55,9 @@ namespace StringExtension.Tests
         [InlineData("A1")]
         [InlineData("a ")]
         [InlineData(" a")]
-        public void IsAlphabetFailed(string source)
+        public void IsAlphabetOnlyFailed(string source)
         {
-            Assert.False(source.IsAlphabet(), $"source is \"{source}\"");
+            Assert.False(source.IsAlphabetOnly(), $"source is \"{source}\"");
         }
 
         [Fact]
