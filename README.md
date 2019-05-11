@@ -1,4 +1,7 @@
 # StringExtension
+
+[![Build Status](https://dev.azure.com/kurihara-vso/BuildPipeline/_apis/build/status/KuriharaJun.StringExtension?branchName=master)](https://dev.azure.com/kurihara-vso/BuildPipeline/_build/latest?definitionId=1&branchName=master)
+
 String class extensions for C#
 
 ## Description
