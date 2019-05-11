@@ -21,13 +21,13 @@ steps:
 - task: DotNetCoreCLI@2
   inputs:
     command: 'build'
-    projects: 'src/StringExtension/SrtingExtension.csproj'
+    projects: 'StringExtension/src/StringExtension/SrtingExtension.csproj'
     feedsToUse: 'select'
     versioningScheme: 'off'
 
 - task: DotNetCoreCLI@2
   inputs:
     command: 'test'
-    projects: 'test/SrtingExtension.Tests/SrtingExtension.Tests.csproj'
+    projects: 'StringExtension/test/SrtingExtension.Tests/SrtingExtension.Tests.csproj'
     feedsToUse: 'select'
     versioningScheme: 'off'
