@@ -60,39 +60,46 @@ namespace StringExtension.Tests
             Assert.False(source.IsAlphabetOnly(), $"source is \"{source}\"");
         }
 
-        [Fact]
-        public void IsNumberSuccessZero()
+        [Theory]
+        [InlineData("-10")]
+        [InlineData("-10.0")]
+        [InlineData("-10.01")]
+        [InlineData("-1")]
+        [InlineData("-1.0")]
+        [InlineData("-1.01")]
+        [InlineData("0")]
+        [InlineData("0.0")]
+        [InlineData("0.00")]
+        [InlineData("1")]
+        [InlineData("1.0")]
+        [InlineData("1.01")]
+        [InlineData("9")]
+        [InlineData("10")]
+        [InlineData("10.0")]
+        [InlineData("10.01")]
+        [InlineData("+1")]
+        [InlineData("+1.0")]
+        [InlineData("+1.01")]
+        [InlineData("+10")]
+        [InlineData("+10.0")]
+        [InlineData("+10.01")]
+        public void IsFloatWithSignSuccess(string source)
         {
-            var source = "0";
-            Assert.True(source.IsNumber());
+            Assert.True(source.IsFloatWithSign(), $"source is \"{source}\"");
         }
 
-        [Fact]
-        public void IsNumberSuccessOne()
+        [Theory]
+        [InlineData("a")]
+        [InlineData("1.a")]
+        [InlineData("-1.a")]
+        [InlineData("1..0")]
+        [InlineData("..1")]
+        [InlineData("1..")]
+        [InlineData("1-")]
+        [InlineData("1+")]
+        public void IsFloatWithSignFailed(string source)
         {
-            var source = "1";
-            Assert.True(source.IsNumber());
-        }
-
-        [Fact]
-        public void IsNumberSuccessMinus()
-        {
-            var source = "-1";
-            Assert.True(source.IsNumber());
-        }
-
-        [Fact]
-        public void IsNumverSuccessDecimal()
-        {
-            var source = "1.0";
-            Assert.True(source.IsNumber());
-        }
-
-        [Fact]
-        public void IsNumberSuccessDecimalMinus()
-        {
-            var source = "-1.0";
-            Assert.True(source.IsNumber());
+            Assert.False(source.IsFloatWithSign(), $"source is \"{source}\"");
         }
     }
 }

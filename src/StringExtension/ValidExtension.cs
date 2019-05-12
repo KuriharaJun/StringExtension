@@ -25,6 +25,7 @@
 
 using System;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace StringExtension
 {
@@ -33,6 +34,12 @@ namespace StringExtension
      /// </summary>
     public static class ValidExtension
     {
+        /// <summary>
+        /// Pattern of float with sign
+        /// </summary>
+        /// <returns></returns>
+        private const string _FloatPatternWithSign = "(^[-+]?[\\d]*?)([\\.]?[\\d]+)*?$";
+
          /// <summary>
          /// Returns the result of alphabetic validation of string value.
          /// This validation range is 'A' to 'Z' and 'a' to 'z'.
@@ -51,14 +58,13 @@ namespace StringExtension
 
         /// <summary>
         /// Returns the result of number validation of string value.
-        /// This validation is including negative value.
+        /// This validation is including plus or minus sign.
         /// </summary>
         /// <param name="source">Validating value</param>
         /// <returns>Result of number validation</returns>
-        public static bool IsNumber(this string source)
+        public static bool IsFloatWithSign(this string source)
         {
-            throw new NotImplementedException();
-            return false;
+            return new Regex(_FloatPatternWithSign).IsMatch(source);
         }
 
         /// <summary>
