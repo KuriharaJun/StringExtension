@@ -38,7 +38,7 @@ namespace StringExtension
         /// Pattern of float with sign
         /// </summary>
         /// <returns></returns>
-        private const string _FloatPatternWithSign = "(^[-+]?[\\d]*?)([\\.]?[\\d]+)*?$";
+        private const string _FloatPatternWithSign = "(^[-+]?)[\\d]+([\\.]?[\\d]+)*?$";
 
          /// <summary>
          /// Returns the result of alphabetic validation of string value.

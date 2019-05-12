@@ -93,6 +93,7 @@ namespace StringExtension.Tests
         [InlineData("1.a")]
         [InlineData("-1.a")]
         [InlineData("1..0")]
+        [InlineData(".1")]
         [InlineData("..1")]
         [InlineData("1..")]
         [InlineData("1-")]
