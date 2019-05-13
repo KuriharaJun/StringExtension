@@ -102,5 +102,48 @@ namespace StringExtension.Tests
         {
             Assert.False(source.IsFloatWithSign(), $"source is \"{source}\"");
         }
+        [Theory]
+        [InlineData("0")]
+        [InlineData("0.0")]
+        [InlineData("0.00")]
+        [InlineData("1")]
+        [InlineData("1.0")]
+        [InlineData("1.01")]
+        [InlineData("9")]
+        [InlineData("10")]
+        [InlineData("10.0")]
+        [InlineData("10.01")]
+        public void IsFloatWithoutSignSuccess(string source)
+        {
+            Assert.True(source.IsFloatWithoutSign(), $"source is \"{source}\"");
+        }
+
+        [Theory]
+        [InlineData("")]
+        [InlineData("-10")]
+        [InlineData("-10.0")]
+        [InlineData("-10.01")]
+        [InlineData("-1")]
+        [InlineData("-1.0")]
+        [InlineData("-1.01")]
+        [InlineData("+1")]
+        [InlineData("+1.0")]
+        [InlineData("+1.01")]
+        [InlineData("+10")]
+        [InlineData("+10.0")]
+        [InlineData("+10.01")]
+        [InlineData("a")]
+        [InlineData("1.a")]
+        [InlineData("-1.a")]
+        [InlineData("1..0")]
+        [InlineData(".1")]
+        [InlineData("..1")]
+        [InlineData("1..")]
+        [InlineData("1-")]
+        [InlineData("1+")]
+        public void IsFloatWithoutSignFailed(string source)
+        {
+            Assert.False(source.IsFloatWithoutSign(), $"source is \"{source}\"");
+        }
     }
 }

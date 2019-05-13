@@ -40,6 +40,12 @@ namespace StringExtension
         /// <returns></returns>
         private const string _FloatPatternWithSign = "(^[-+]?)[\\d]+([\\.]?[\\d]+)*?$";
 
+        /// <summary>
+        /// Pattern of float without sign
+        /// </summary>
+        /// <returns></returns>
+        private const string _FloatPatternWithoutSign = "^[\\d]+([\\.]?[\\d]+)*?$";
+
          /// <summary>
          /// Returns the result of alphabetic validation of string value.
          /// This validation range is 'A' to 'Z' and 'a' to 'z'.
@@ -65,6 +71,17 @@ namespace StringExtension
         public static bool IsFloatWithSign(this string source)
         {
             return new Regex(_FloatPatternWithSign).IsMatch(source);
+        }
+
+        /// <summary>
+        /// Returns the result of number validation of string value.
+        /// This validation is excluding plus or minus sign.
+        /// </summary>
+        /// <param name="source">Validating value</param>
+        /// <returns>Result of number validation</returns>
+        public static bool IsFloatWithoutSign(this string source)
+        {
+            return new Regex(_FloatPatternWithoutSign).IsMatch(source);
         }
 
         /// <summary>
