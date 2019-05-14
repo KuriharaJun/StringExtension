@@ -189,5 +189,49 @@ namespace StringExtension.Tests
         {
             Assert.False(source.IsIntegerWithSign(), $"source is \"{source}\"");
         }
+
+        [Theory]
+        [InlineData("0")]
+        [InlineData("1")]
+        [InlineData("9")]
+        [InlineData("10")]
+        public void IsIntegerWithoutSignSuccess(string source)
+        {
+            Assert.True(source.IsIntegerWithoutSign(), $"source is \"{source}\"");
+        }
+
+        [Theory]
+        [InlineData("")]
+        [InlineData("-10")]
+        [InlineData("-1")]
+        [InlineData("-10.0")]
+        [InlineData("-10.01")]
+        [InlineData("-1.0")]
+        [InlineData("-1.01")]
+        [InlineData("+1.0")]
+        [InlineData("+1.01")]
+        [InlineData("+10.0")]
+        [InlineData("+10.01")]
+        [InlineData("+1")]
+        [InlineData("+10")]
+        [InlineData("a")]
+        [InlineData("1.a")]
+        [InlineData("-1.a")]
+        [InlineData("1..0")]
+        [InlineData(".1")]
+        [InlineData("..1")]
+        [InlineData("1..")]
+        [InlineData("1-")]
+        [InlineData("1+")]
+        [InlineData("0.0")]
+        [InlineData("0.00")]
+        [InlineData("1.0")]
+        [InlineData("1.01")]
+        [InlineData("10.0")]
+        [InlineData("10.01")]
+        public void IsIntegerWithSignoutSignFailed(string source)
+        {
+            Assert.False(source.IsIntegerWithoutSign(), $"source is \"{source}\"");
+        }
     }
 }

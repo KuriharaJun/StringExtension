@@ -102,6 +102,18 @@ namespace StringExtension
         }
 
         /// <summary>
+        /// Returns the result of integer validation.
+        /// This validation is excluding plus or minus sign.
+        /// </summary>
+        /// <param name="source">validating value</param>
+        /// <returns>Result of number validation</returns>
+        public static bool IsIntegerWithoutSign(this string source)
+        {
+            if (source == string.Empty) return false;
+            return source.All(c => c >= 0x30 && 0x39 >= c);
+        }
+
+        /// <summary>
         /// Returns the result of ASCII chars validation of value.
         /// This validation is including Control characters.
         /// </summary>
