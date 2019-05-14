@@ -38,7 +38,19 @@ namespace StringExtension
         /// Pattern of float with sign
         /// </summary>
         /// <returns></returns>
-        private const string _FloatPatternWithSign = "(^[-+]?[\\d]*?)([\\.]?[\\d]+)*?$";
+        private const string _FloatPatternWithSign = "(^[-+]?)[\\d]+([\\.]?[\\d]+)*?$";
+
+        /// <summary>
+        /// Pattern of float without sign
+        /// </summary>
+        /// <returns></returns>
+        private const string _FloatPatternWithoutSign = "^[\\d]+([\\.]?[\\d]+)*?$";
+
+        /// <summary>
+        /// Pattern of integer with sign
+        /// </summary>
+        /// <returns></returns>
+        private const string _IntegerPatternWithSign = "(^[-+]?)[\\d]+$";
 
          /// <summary>
          /// Returns the result of alphabetic validation of string value.
@@ -65,6 +77,40 @@ namespace StringExtension
         public static bool IsFloatWithSign(this string source)
         {
             return new Regex(_FloatPatternWithSign).IsMatch(source);
+        }
+
+        /// <summary>
+        /// Returns the result of number validation of string value.
+        /// This validation is excluding plus or minus sign.
+        /// </summary>
+        /// <param name="source">Validating value</param>
+        /// <returns>Result of number validation</returns>
+        public static bool IsFloatWithoutSign(this string source)
+        {
+            return new Regex(_FloatPatternWithoutSign).IsMatch(source);
+        }
+
+        /// <summary>
+        /// Returns the result of integer validation.
+        /// This validation is including plus or minus sign.
+        /// </summary>
+        /// <param name="source">validating value</param>
+        /// <returns>Result of number validation</returns>
+        public static bool IsIntegerWithSign(this string source)
+        {
+            return new Regex(_IntegerPatternWithSign).IsMatch(source);
+        }
+
+        /// <summary>
+        /// Returns the result of integer validation.
+        /// This validation is excluding plus or minus sign.
+        /// </summary>
+        /// <param name="source">validating value</param>
+        /// <returns>Result of number validation</returns>
+        public static bool IsIntegerWithoutSign(this string source)
+        {
+            if (source == string.Empty) return false;
+            return source.All(c => c >= 0x30 && 0x39 >= c);
         }
 
         /// <summary>
