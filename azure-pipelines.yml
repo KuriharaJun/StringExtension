@@ -19,8 +19,16 @@ steps:
     versioningScheme: 'off'
 
 - task: DotNetCoreCLI@2
+  displayName: Unit Test
   inputs:
     command: 'test'
     projects: '**/*.Tests/*.csproj'
     feedsToUse: 'select'
+    versioningScheme: 'off'
+
+- task: DotNetCoreCLI@2
+  displayName: Packaging
+  inputs:
+    command: 'pack'
+    projects: 'src/**/*.csproj'
     versioningScheme: 'off'
