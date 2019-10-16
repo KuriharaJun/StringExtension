@@ -121,8 +121,8 @@ namespace StringExtension
         /// <returns>Validation result</returns>
         public static bool IsASCII(this string source)
         {
-            throw new NotImplementedException();
-            return false;
+            if (string.IsNullOrEmpty(source)) return false;
+            return source.All(c => c >= 0x00 && 0x7E >= c);
         }
     }
 }

@@ -233,5 +233,27 @@ namespace StringExtension.Tests
         {
             Assert.False(source.IsIntegerWithoutSign(), $"source is \"{source}\"");
         }
+
+        [Theory]
+        [InlineData("")]
+        [InlineData("\x7F")]
+        [InlineData("あ")]
+        [InlineData("１")]
+        [InlineData("Ａ")]
+        [InlineData("ｱ")]
+        [InlineData("!あ~")]
+        public void IsAsciiFailed(string source)
+        {
+            Assert.False(source.IsASCII(), $"source is \"{source}\"");
+        }
+
+        [Theory]
+        [InlineData("\x00")]
+        [InlineData("\x7E")]
+        [InlineData("\x00\x20\x30\x7E")]
+        public void IsAsciiSuccess(string source)
+        {
+            Assert.True(source.IsASCII(), $"source is \"{source}\"");
+        }
     }
 }
