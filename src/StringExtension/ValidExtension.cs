@@ -29,9 +29,9 @@ using System.Text.RegularExpressions;
 
 namespace StringExtension
 {
-     /// <summary>
-     /// This extension class is validating to string  value.
-     /// </summary>
+    /// <summary>
+    /// This extension class is validating to string  value.
+    /// </summary>
     public static class ValidExtension
     {
         /// <summary>
@@ -52,13 +52,13 @@ namespace StringExtension
         /// <returns></returns>
         private const string _IntegerPatternWithSign = "(^[-+]?)[\\d]+$";
 
-         /// <summary>
-         /// Returns the result of alphabetic validation of string value.
-         /// This validation range is 'A' to 'Z' and 'a' to 'z'.
-         /// This range is not match ASCII chars.Use IsASCII when validate ASCII chars.
-         /// </summary>
-         /// <param name="source">Validating value</param>
-         /// <returns>Result of alphabet validation</returns>
+        /// <summary>
+        /// Returns the result of alphabetic validation of string value.
+        /// This validation range is 'A' to 'Z' and 'a' to 'z'.
+        /// This range is not match ASCII chars.Use IsASCII when validate ASCII chars.
+        /// </summary>
+        /// <param name="source">Validating value</param>
+        /// <returns>Result of alphabet validation</returns>
         public static bool IsAlphabetOnly(this string source)
         {
             if (string.IsNullOrEmpty(source))
