@@ -279,5 +279,31 @@ namespace StringExtension.Tests
         {
             Assert.False(source.IsOnlyUpperCaseAlphabet(), $"source is \"{source}\"");
         }
+
+        [Theory]
+        [InlineData("")]
+        [InlineData("1")]
+        [InlineData("9")]
+        [InlineData("A")]
+        [InlineData("Z")]
+        [InlineData("あ")]
+        [InlineData("ア")]
+        [InlineData("A1")]
+        [InlineData("Aa")]
+        [InlineData("Aあ")]
+        [InlineData("Aア")]
+        public void ReturnFalseIsOnlyLowerCaseAlphabet(string source)
+        {
+            Assert.False(source.IsOnlyLowerCaseAlphabet(), $"source is \"{source}\"");
+        }
+
+        [Theory]
+        [InlineData("a")]
+        [InlineData("z")]
+        [InlineData("abcxyz")]
+        public void ReturnTrueIsOnlyLowerCaseAlphabet(string source)
+        {
+            Assert.True(source.IsOnlyLowerCaseAlphabet(), $"source is \"{source}\"");
+        }
     }
 }

@@ -143,7 +143,8 @@ namespace StringExtension
         /// <returns>Validation result</returns>
         public static bool IsOnlyLowerCaseAlphabet(this string source)
         {
-            throw new NotImplementedException();
+            if (source == string.Empty) return false;
+            return source.ToCharArray().All(c => (c >= 0x61 && 0x7a >= c));
         }
 
         /// <summary>
