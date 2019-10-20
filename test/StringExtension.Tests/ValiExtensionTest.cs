@@ -338,5 +338,36 @@ namespace StringExtension.Tests
         {
             Assert.False(source.HasLowerCaseAlphabet(), $"source is \"{source}\"");
         }
+
+        [Theory]
+        [InlineData("A")]
+        [InlineData("Z")]
+        [InlineData("Aa")]
+        [InlineData("aA")]
+        [InlineData(" A")]
+        [InlineData("A ")]
+        [InlineData("1A")]
+        [InlineData("A1")]
+        [InlineData("あA")]
+        [InlineData("Aあ")]
+        [InlineData("@A")]
+        [InlineData("A@")]
+        public void ReturnTrueHasUpperCaseAlphabet(string source)
+        {
+            Assert.True(source.HasUpperCaseAlphabet(), $"source is \"{source}\"");
+        }
+
+        [Theory]
+        [InlineData("")]
+        [InlineData("a")]
+        [InlineData("z")]
+        [InlineData("1")]
+        [InlineData("あ")]
+        [InlineData("@")]
+        [InlineData("\n")]
+        public void ReturnFalseHasUpperCaseAlphabet(string source)
+        {
+            Assert.False(source.HasUpperCaseAlphabet(), $"source is \"{source}\"");
+        }
     }
 }

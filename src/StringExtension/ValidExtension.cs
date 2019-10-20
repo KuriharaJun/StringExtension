@@ -165,7 +165,8 @@ namespace StringExtension
         /// <returns>Validation result</returns>
         public static bool HasUpperCaseAlphabet(this string source)
         {
-            throw new NotImplementedException();
+            if (source == string.Empty) return false;
+            return source.ToCharArray().Any(c => (c >= 0x41 && 0x5a >= c));
         }
 
         /// <summary>
