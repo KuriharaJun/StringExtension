@@ -124,5 +124,55 @@ namespace StringExtension
             if (string.IsNullOrEmpty(source)) return false;
             return source.All(c => c >= 0x00 && 0x7E >= c);
         }
+
+        /// <summary>
+        /// Returns the result which validate all characters are upper case alphabet.
+        /// </summary>
+        /// <param name="source">Validating value</param>
+        /// <returns>Validation result</returns>
+        public static bool IsOnlyUpperCaseAlphabet(this string source)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Returns the result which validate all characters are lower case alphabet.
+        /// </summary>
+        /// <param name="source">Validating value</param>
+        /// <returns>Validation result</returns>
+        public static bool IsOnlyLowerCaseAlphabet(this string source)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Returns the result which validate characters include lower case alphabet.
+        /// </summary>
+        /// <param name="source">Validating value</param>
+        /// <returns>Validation result</returns>
+        public static bool HasLowerCaseAlphabet(this string source)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Returns the result which validate characters include upper case alphabet.
+        /// </summary>
+        /// <param name="source">Validating value</param>
+        /// <returns>Validation result</returns>
+        public static bool HasUpperCaseAlphabet(this string source)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Returns the result which validate characters include alphabet.
+        /// </summary>
+        /// <param name="source">Validating value</param>
+        /// <returns>Validation result</returns>
+        public static bool HasAlphabet(this string source)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
