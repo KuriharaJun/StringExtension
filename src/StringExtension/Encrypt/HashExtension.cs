@@ -23,17 +23,60 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
+using System;
+using System.Text;
+using System.Security.Cryptography;
+
 namespace StringExtension.Encrypt
 {
 
     /// <summary>
-    /// ハッシュ値への変換を行う
+    /// This class is converted hashed value from source string.
     /// </summary>
     public static class HashExtension
     {
-        public static string GenerateHashString(this string source)
+        /// <summary>
+        /// Generate hashed string of the string to according to hash algorithm.
+        /// </summary>
+        /// <param name="source"></param>
+        /// <param name="hashAlgorithm"></param>
+        /// <returns></returns>
+        public static string GenerateHashString(this string source,
+                                                HashAlgorithm hashAlgorithm = HashAlgorithm.SHA256)
         {
-            return null;
+            if (string.IsNullOrEmpty(source)) throw new ArgumentException(nameof(source));
+
+            var sourceData = Encoding.UTF8.GetBytes(source);
+
+            byte[] hashedData = null;
+            switch (hashAlgorithm)
+            {
+                case HashAlgorithm.SHA1:
+                    using (var hash = SHA1.Create())
+                    {
+                        hashedData = hash.ComputeHash(sourceData);
+                    }
+                    break;
+                case HashAlgorithm.SHA512:
+                    {
+                        using (var hash = SHA512.Create())
+                        {
+                            hashedData = hash.ComputeHash(sourceData);
+                        }
+                        break;
+                    }
+                case HashAlgorithm.SHA256:
+                default:
+                    {
+                        using (var hash = SHA256.Create())
+                        {
+                            hashedData = hash.ComputeHash(sourceData);
+                        }
+                        break;
+                    }
+            }
+            var result = BitConverter.ToString(hashedData).ToLower().Replace("-", "");
+            return result;
         }
     }
 }
