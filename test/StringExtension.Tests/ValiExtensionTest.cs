@@ -23,8 +23,6 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-using System;
-using StringExtension;
 using Xunit;
 
 namespace StringExtension.Tests
@@ -254,6 +252,163 @@ namespace StringExtension.Tests
         public void IsAsciiSuccess(string source)
         {
             Assert.True(source.IsASCII(), $"source is \"{source}\"");
+        }
+
+        [Theory]
+        [InlineData("A")]
+        [InlineData("Z")]
+        [InlineData("ABCXYZ")]
+        public void ReturnTrueIsOnlyUpperCaseAlphabet(string source)
+        {
+            Assert.True(source.IsOnlyUpperCaseAlphabet(), $"source is \"{source}\"");
+        }
+
+        [Theory]
+        [InlineData("")]
+        [InlineData("1")]
+        [InlineData("9")]
+        [InlineData("a")]
+        [InlineData("z")]
+        [InlineData("あ")]
+        [InlineData("ア")]
+        [InlineData("A1")]
+        [InlineData("Aa")]
+        [InlineData("Aあ")]
+        [InlineData("Aア")]
+        public void ReturnFalseIsOnlyUpperCaseAlphabet(string source)
+        {
+            Assert.False(source.IsOnlyUpperCaseAlphabet(), $"source is \"{source}\"");
+        }
+
+        [Theory]
+        [InlineData("")]
+        [InlineData("1")]
+        [InlineData("9")]
+        [InlineData("A")]
+        [InlineData("Z")]
+        [InlineData("あ")]
+        [InlineData("ア")]
+        [InlineData("A1")]
+        [InlineData("Aa")]
+        [InlineData("Aあ")]
+        [InlineData("Aア")]
+        public void ReturnFalseIsOnlyLowerCaseAlphabet(string source)
+        {
+            Assert.False(source.IsOnlyLowerCaseAlphabet(), $"source is \"{source}\"");
+        }
+
+        [Theory]
+        [InlineData("a")]
+        [InlineData("z")]
+        [InlineData("abcxyz")]
+        public void ReturnTrueIsOnlyLowerCaseAlphabet(string source)
+        {
+            Assert.True(source.IsOnlyLowerCaseAlphabet(), $"source is \"{source}\"");
+        }
+
+        [Theory]
+        [InlineData("a")]
+        [InlineData("z")]
+        [InlineData(" a")]
+        [InlineData("a ")]
+        [InlineData("1a")]
+        [InlineData("a1")]
+        [InlineData("Aa")]
+        [InlineData("aA")]
+        [InlineData("あa")]
+        [InlineData("aあ")]
+        [InlineData("@a")]
+        [InlineData("a@")]
+        [InlineData("\na")]
+        [InlineData("a\n")]
+        public void ReturnTrueHasLowerCaseAlphabet(string source)
+        {
+            Assert.True(source.HasLowerCaseAlphabet(), $"source is \"{source}\"");
+        }
+
+        [Theory]
+        [InlineData("")]
+        [InlineData("A")]
+        [InlineData("Z")]
+        [InlineData("1")]
+        [InlineData("あ")]
+        [InlineData("@")]
+        [InlineData("\n")]
+        public void ReturnFalseHasLowerCaseAlphabet(string source)
+        {
+            Assert.False(source.HasLowerCaseAlphabet(), $"source is \"{source}\"");
+        }
+
+        [Theory]
+        [InlineData("A")]
+        [InlineData("Z")]
+        [InlineData("Aa")]
+        [InlineData("aA")]
+        [InlineData(" A")]
+        [InlineData("A ")]
+        [InlineData("1A")]
+        [InlineData("A1")]
+        [InlineData("あA")]
+        [InlineData("Aあ")]
+        [InlineData("@A")]
+        [InlineData("A@")]
+        public void ReturnTrueHasUpperCaseAlphabet(string source)
+        {
+            Assert.True(source.HasUpperCaseAlphabet(), $"source is \"{source}\"");
+        }
+
+        [Theory]
+        [InlineData("")]
+        [InlineData("a")]
+        [InlineData("z")]
+        [InlineData("1")]
+        [InlineData("あ")]
+        [InlineData("@")]
+        [InlineData("\n")]
+        public void ReturnFalseHasUpperCaseAlphabet(string source)
+        {
+            Assert.False(source.HasUpperCaseAlphabet(), $"source is \"{source}\"");
+        }
+
+        [Theory]
+        [InlineData("a")]
+        [InlineData("z")]
+        [InlineData("A")]
+        [InlineData("Z")]
+        [InlineData(" a")]
+        [InlineData("a ")]
+        [InlineData(" A")]
+        [InlineData("A ")]
+        [InlineData("1a")]
+        [InlineData("a1")]
+        [InlineData("1A")]
+        [InlineData("A1")]
+        [InlineData("@a")]
+        [InlineData("a@")]
+        [InlineData("@A")]
+        [InlineData("A@")]
+        [InlineData("あa")]
+        [InlineData("aあ")]
+        [InlineData("あA")]
+        [InlineData("Aあ")]
+        [InlineData("\na")]
+        [InlineData("a\n")]
+        [InlineData("\nA")]
+        [InlineData("A\n")]
+        public void ReturnTrueHasAlphabet(string source)
+        {
+            Assert.True(source.HasAlphabet(), $"source is \"{source}\"");
+        }
+
+        [Theory]
+        [InlineData("")]
+        [InlineData("1")]
+        [InlineData("あ")]
+        [InlineData("@")]
+        [InlineData("\n")]
+        public void ReturnFalseHasAlphabet(string source)
+        {
+            Assert.False(source.HasAlphabet(), $"source is \"{source}\"");
         }
     }
 }
