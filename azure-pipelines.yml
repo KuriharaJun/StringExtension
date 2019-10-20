@@ -4,12 +4,24 @@
 # https://aka.ms/yaml
 
 trigger:
-- master
+  branches:
+    include:
+      - master
+  tags:
+    include:
+      - v*
+
+variables:
+  isReleaseTag: ${{ startsWith(variables['Build.SourceBranch'], 'refs/tags/v') }}
+  buildConfiguration: 'Release'
 
 pool:
   vmImage: 'ubuntu-latest'
 
 steps:
+- checkout: 
+  fetchDepth: 1
+
 - task: DotNetCoreCLI@2
   displayName: Build
   inputs:
@@ -17,6 +29,7 @@ steps:
     projects: '**/*.csproj'
     feedsToUse: 'select'
     versioningScheme: 'off'
+    arguments: '-c ${buildConfiguration}'
 
 - task: DotNetCoreCLI@2
   displayName: Unit Test
@@ -32,3 +45,4 @@ steps:
     command: 'pack'
     projects: 'src/**/*.csproj'
     versioningScheme: 'off'
+  condition: and(succeeded(), eq(variables['isReleaseTag'], 'true'))
