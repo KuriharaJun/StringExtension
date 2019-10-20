@@ -23,8 +23,6 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-using System;
-using StringExtension;
 using Xunit;
 
 namespace StringExtension.Tests
@@ -254,6 +252,32 @@ namespace StringExtension.Tests
         public void IsAsciiSuccess(string source)
         {
             Assert.True(source.IsASCII(), $"source is \"{source}\"");
+        }
+
+        [Theory]
+        [InlineData("A")]
+        [InlineData("Z")]
+        [InlineData("ABCXYZ")]
+        public void ReturnTrueIsOnlyUpperCaseAlphabet(string source)
+        {
+            Assert.True(source.IsOnlyUpperCaseAlphabet(), $"source is \"{source}\"");
+        }
+
+        [Theory]
+        [InlineData("")]
+        [InlineData("1")]
+        [InlineData("9")]
+        [InlineData("a")]
+        [InlineData("z")]
+        [InlineData("あ")]
+        [InlineData("ア")]
+        [InlineData("A1")]
+        [InlineData("Aa")]
+        [InlineData("Aあ")]
+        [InlineData("Aア")]
+        public void ReturnFalseIsOnlyUpperCaseAlphabet(string source)
+        {
+            Assert.False(source.IsOnlyUpperCaseAlphabet(), $"source is \"{source}\"");
         }
     }
 }
