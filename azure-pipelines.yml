@@ -42,6 +42,7 @@ steps:
     projects: '**/*.Tests/*.csproj'
     feedsToUse: 'select'
     versioningScheme: 'off'
+    publishTestResults: true
 
 - task: DotNetCoreCLI@2
   inputs:
