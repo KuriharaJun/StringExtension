@@ -154,7 +154,8 @@ namespace StringExtension
         /// <returns>Validation result</returns>
         public static bool HasLowerCaseAlphabet(this string source)
         {
-            throw new NotImplementedException();
+            if (source == string.Empty) return false;
+            return source.ToCharArray().Any(c => (c >= 0x61 && 0x7a >= c));
         }
 
         /// <summary>
