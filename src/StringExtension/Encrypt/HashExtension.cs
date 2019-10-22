@@ -49,31 +49,32 @@ namespace StringExtension.Encrypt
             var sourceData = Encoding.UTF8.GetBytes(source);
 
             byte[] hashedData = null;
-            switch (hashAlgorithm)
+            System.Security.Cryptography.HashAlgorithm hash = null;
+            try
             {
-                case HashAlgorithm.SHA1:
-                    using (var hash = SHA1.Create())
-                    {
-                        hashedData = hash.ComputeHash(sourceData);
-                    }
-                    break;
-                case HashAlgorithm.SHA512:
-                    {
-                        using (var hash = SHA512.Create())
-                        {
-                            hashedData = hash.ComputeHash(sourceData);
-                        }
+                switch (hashAlgorithm)
+                {
+                    case HashAlgorithm.SHA1:
+                        hash = SHA1.Create();
                         break;
-                    }
-                case HashAlgorithm.SHA256:
-                default:
-                    {
-                        using (var hash = SHA256.Create())
+                    case HashAlgorithm.SHA512:
                         {
-                            hashedData = hash.ComputeHash(sourceData);
+                            hash = SHA512.Create();
+                            break;
                         }
-                        break;
-                    }
+                    case HashAlgorithm.SHA256:
+                    default:
+                        {
+                            hash = SHA256.Create();
+                            break;
+                        }
+                }
+
+                hashedData = hash.ComputeHash(sourceData);
+            }
+            finally
+            {
+                hash?.Dispose();
             }
             var result = BitConverter.ToString(hashedData).ToLower().Replace("-", "");
             return result;
