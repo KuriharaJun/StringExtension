@@ -22,6 +22,10 @@ steps:
 - checkout: self
   fetchDepth: 1
 
+- powershell: 'echo "##vso[task.setvariable variable=PackageVersion]$($env:Build_SourceBranchName.Substring(1))"'
+  displayName: 'PowerShell Script'
+  condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/tags/v'))
+
 - task: DotNetCoreCLI@2
   displayName: Build
   inputs:
@@ -38,11 +42,21 @@ steps:
     projects: '**/*.Tests/*.csproj'
     feedsToUse: 'select'
     versioningScheme: 'off'
+    publishTestResults: true
 
 - task: DotNetCoreCLI@2
-  displayName: Packaging
   inputs:
     command: 'pack'
-    projects: 'src/**/*.csproj'
-    versioningScheme: 'off'
+    nobuild: true
+    packagesToPack: 'src/**/*.csproj'
+    versioningScheme: 'byEnvVar'
+    versionEnvVar: 'PackageVersion'
+    verbosityPack: 'Normal'
+  condition: and(succeeded(), eq(variables['isReleaseTag'], 'true'))
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
   condition: and(succeeded(), eq(variables['isReleaseTag'], 'true'))
