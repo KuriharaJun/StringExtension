@@ -10,6 +10,8 @@ trigger:
   tags:
     include:
       - v*
+    exclude:
+      - v*-beta-*
 
 variables:
   isReleaseTag: ${{ startsWith(variables['Build.SourceBranch'], 'refs/tags/v') }}
