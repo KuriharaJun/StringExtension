@@ -68,7 +68,7 @@ steps:
     action: 'create'
     target: '$(Build.SourceVersion)'
     tagSource: 'gitTag'
-    tagPattern: 'v0.1.2-beta*'
+    tag: 'v$(MajorVersion).$(MinorVersion).$(PatchVersion)$(Suffix)$(Build.BuildNumber)'
     releaseNotesSource: 'inline'
     isDraft: true
     addChangeLog: false
