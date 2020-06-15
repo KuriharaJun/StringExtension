@@ -27,7 +27,7 @@ using System;
 
 namespace StringExtension
 {
-    public static class StringExtension
+    public static class JudgementExtension
     {
         /// <summary>
         /// Judgement string include Unix style linefeed control.
