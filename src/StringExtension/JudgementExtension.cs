@@ -23,7 +23,6 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-using System;
 using System.Linq;
 
 namespace StringExtension
@@ -32,9 +31,9 @@ namespace StringExtension
     {
         private static readonly char _macStyleLineFeed = '\r';
 
-        private static readonly char _UnixLineFeed = '\n';
+        private static readonly char _unixLineFeed = '\n';
 
-        private static readonly string _WindowsLineFeed = "\r\n";
+        private static readonly string _windowsLineFeed = "\r\n";
 
         /// <summary>
         /// Judgement string include Unix style linefeed control.
@@ -43,7 +42,7 @@ namespace StringExtension
         /// <returns>If linefeed control is LF only then return true.</returns>
         public static bool IsUnixStyleLineFeed(this string source)
         {
-            return source.IsWindowsStyleLineFeed() ? false : source.Any(s => s == _UnixLineFeed);
+            return source.IsWindowsStyleLineFeed() ? false : source.Any(s => s == _unixLineFeed) && !source.Any(s => s == _macStyleLineFeed);
         }
 
         /// <summary>
@@ -51,7 +50,7 @@ namespace StringExtension
         /// </summary>
         /// <param name="source">Target string</param>
         /// <returns>If linefeed control is CRLF then return true.</returns>
-        public static bool IsWindowsStyleLineFeed(this string source) => source.IndexOf(_WindowsLineFeed) >= 0;
+        public static bool IsWindowsStyleLineFeed(this string source) => source.IndexOf(_windowsLineFeed) >= 0;
 
         /// <summary>
         /// Judgement string include Mac style linefeed control.
@@ -60,7 +59,7 @@ namespace StringExtension
         /// <returns>If linefeed control is CR only then return true.</returns>
         public static bool IsMacStyleLineFeed(this string source)
         {
-            return source.IsWindowsStyleLineFeed() ? false : source.Any(s => s == _macStyleLineFeed) && !source.Any(s => s == _UnixLineFeed);
+            return source.IsWindowsStyleLineFeed() ? false : source.Any(s => s == _macStyleLineFeed) && !source.Any(s => s == _unixLineFeed);
         }
     }
 }

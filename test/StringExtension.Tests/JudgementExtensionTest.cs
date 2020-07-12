@@ -1,4 +1,4 @@
-
+﻿
 
 using Xunit;
 /**
@@ -64,6 +64,7 @@ namespace StringExtension.Tests
         [InlineData("")]
         [InlineData("\r")]
         [InlineData("\r\n")]
+        [InlineData("\n\r")]
         [InlineData("sample")]
         [InlineData("sample\r\n\n")]
         public void TestIsUnixStyleLineFeedReturnFalse(string source) => Assert.False(source.IsUnixStyleLineFeed());
