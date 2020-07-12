@@ -29,6 +29,8 @@ namespace StringExtension
 {
     public static class JudgementExtension
     {
+        private static readonly string _WindowsLineFeed = "\r\n";
+
         /// <summary>
         /// Judgement string include Unix style linefeed control.
         /// </summary>
@@ -44,10 +46,7 @@ namespace StringExtension
         /// </summary>
         /// <param name="source">Target string</param>
         /// <returns>If linefeed control is CRLF then return true.</returns>
-        public static bool IsWindowsStyleLineFeed(this string source)
-        {
-            throw new NotImplementedException();
-        }
+        public static bool IsWindowsStyleLineFeed(this string source) => source.IndexOf(_WindowsLineFeed) >= 0;
 
         /// <summary>
         /// Judgement string include Mac style linefeed control.
