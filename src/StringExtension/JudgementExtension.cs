@@ -24,11 +24,14 @@
  */
 
 using System;
+using System.Linq;
 
 namespace StringExtension
 {
     public static class JudgementExtension
     {
+        private static readonly char _UnixLineFeed = '\n';
+
         private static readonly string _WindowsLineFeed = "\r\n";
 
         /// <summary>
@@ -38,7 +41,7 @@ namespace StringExtension
         /// <returns>If linefeed control is LF only then return true.</returns>
         public static bool IsUnixStyleLineFeed(this string source)
         {
-            throw new NotImplementedException();
+            return source.IsWindowsStyleLineFeed() ? false : source.Any(s => s == _UnixLineFeed);
         }
 
         /// <summary>
