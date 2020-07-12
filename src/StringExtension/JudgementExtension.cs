@@ -30,6 +30,8 @@ namespace StringExtension
 {
     public static class JudgementExtension
     {
+        private static readonly char _macStyleLineFeed = '\r';
+
         private static readonly char _UnixLineFeed = '\n';
 
         private static readonly string _WindowsLineFeed = "\r\n";
@@ -58,7 +60,7 @@ namespace StringExtension
         /// <returns>If linefeed control is CR only then return true.</returns>
         public static bool IsMacStyleLineFeed(this string source)
         {
-            throw new NotImplementedException();
+            return source.IsWindowsStyleLineFeed() ? false : source.Any(s => s == _macStyleLineFeed) && !source.Any(s => s == _UnixLineFeed);
         }
     }
 }

@@ -67,5 +67,23 @@ namespace StringExtension.Tests
         [InlineData("sample")]
         [InlineData("sample\r\n\n")]
         public void TestIsUnixStyleLineFeedReturnFalse(string source) => Assert.False(source.IsUnixStyleLineFeed());
+
+        [Theory]
+        [InlineData("\r")]
+        [InlineData("\rsample")]
+        [InlineData("sample\r")]
+        [InlineData("sa\rmple")]
+        [InlineData("\rsample\r")]
+        [InlineData("sample\r\r")]
+        public void TestIsMacStyleLineFeedReturnTrue(string source) => Assert.True(source.IsMacStyleLineFeed());
+
+        [Theory]
+        [InlineData("")]
+        [InlineData("\n")]
+        [InlineData("\r\n")]
+        [InlineData("sample")]
+        [InlineData("sample\r\n\r")]
+        [InlineData("sample\n\r")]
+        public void TestIsMacStyleLineFeedReturnFalse(string source) => Assert.False(source.IsMacStyleLineFeed());
     }
 }
