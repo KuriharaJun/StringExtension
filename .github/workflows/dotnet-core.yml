@@ -4,9 +4,14 @@ on:
   push:
     tags:
       - v*
+    branches:
+      - feature/*
+      - fix/*
+      - release/*
 
   pull_request:
-    branches: [ master ]
+    branches:
+      - master
 
 jobs:
   build:
@@ -36,8 +41,7 @@ jobs:
       run: dotnet pack -c Release --no-build --no-restore --nologo -o publish -p:PackageVersion=${{steps.tag_name.outputs.SOURCE_TAG}}
     - name: Publish
       if: ${{ contains(github.ref, 'tags/v') && success() }}
-      with:
-          nugetKey: ${{ secrets.NUGET_API_EKY }}
+      env:
+          API_EKY: ${{ secrets.NUGET_API_EKY }}
       run: |
-        API_KEY=$(cat -)
         dotnet nuget push publish/StringExtension."${{steps.tag_name.outputs.SOURCE_TAG}}".nupkg -k "$API_KEY" -s https://api.nuget.org/v3/index.json
