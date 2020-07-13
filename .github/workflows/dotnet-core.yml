@@ -34,7 +34,7 @@ jobs:
       run: dotnet test -f netcoreapp2.1 --no-restore --verbosity normal
     - name: Pack
       if: ${{ contains(github.ref, 'tags/v') && success() }}
-      run: dotnet pack -c Release --no-build --no-restore --nologo -o publish -p:PackageVersion=${{steps.tag_name.outputs.SOURCE_TAG}}
+      run: dotnet pack -c Release --no-build --no-restore -o publish -p:PackageVersion=${{steps.tag_name.outputs.SOURCE_TAG}}
     - name: Publish
       if: ${{ contains(github.ref, 'tags/v') && success() }}
       env:
