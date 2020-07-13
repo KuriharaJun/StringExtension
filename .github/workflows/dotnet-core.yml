@@ -1,8 +1,13 @@
 name: .NET Core
 
 on:
+  push:
+    tags:
+      - v*
+
   pull_request:
-    branches: [ master ]
+    branches:
+      - master
 
 jobs:
   build:
@@ -11,6 +16,11 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    - name: Get tag name
+      id: tag_name
+      if: ${{ contains(github.ref, 'tags/v') }}
+      run: |
+        echo ::set-output name=SOURCE_TAG::${GITHUB_REF#refs/tags/v}
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
@@ -20,4 +30,14 @@ jobs:
     - name: Build
       run: dotnet build --configuration Release --no-restore
     - name: Test
+      if: ${{ !contains(github.ref, 'tags/v') }}
       run: dotnet test -f netcoreapp2.1 --no-restore --verbosity normal
+    - name: Pack
+      if: ${{ contains(github.ref, 'tags/v') && success() }}
+      run: dotnet pack -c Release --no-build --no-restore --nologo -o publish -p:PackageVersion=${{steps.tag_name.outputs.SOURCE_TAG}}
+    - name: Publish
+      if: ${{ contains(github.ref, 'tags/v') && success() }}
+      env:
+          API_EKY: ${{ secrets.NUGET_API_EKY }}
+      run: |
+        dotnet nuget push publish/StringExtension."${{steps.tag_name.outputs.SOURCE_TAG}}".nupkg -k "$API_KEY" -s https://api.nuget.org/v3/index.json
