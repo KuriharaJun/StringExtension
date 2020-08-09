@@ -40,6 +40,6 @@ jobs:
     - name: Publish
       if: ${{ contains(github.ref, 'tags/v') && success() }}
       env:
-          API_EKY: ${{ secrets.NUGET_API_EKY }}
+          API_KEY: ${{ secrets.NUGET_API_EKY }}
       run: |
-        dotnet nuget push publish/StringExtension."${{steps.tag_name.outputs.SOURCE_TAG}}".nupkg -k "$API_KEY" -s https://api.nuget.org/v3/index.json
+        dotnet nuget push "publish/StringExtension.${{steps.tag_name.outputs.SOURCE_TAG}}.nupkg" -k "$API_KEY" -s https://api.nuget.org/v3/index.json
