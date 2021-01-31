@@ -25,8 +25,9 @@
 
 using System;
 using Xunit;
+using StringExtension.Encrypt;
 
-namespace StringExtension.Encrypt
+namespace StringExtension.Tests.Encrypt
 {
     public class HashExtensionTest
     {
