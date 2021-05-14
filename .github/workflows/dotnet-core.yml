@@ -44,6 +44,7 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     if: ${{ contains(github.ref, 'tags/v') }}
+    needs: [build]
     steps:
       - uses: actions/checkout@v2
       - name: Get tag name
