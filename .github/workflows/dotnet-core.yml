@@ -33,6 +33,10 @@ jobs:
       - name: Test
         if: ${{ !contains(github.ref, 'tags/v') }}
         run: dotnet test -f netcoreapp2.1 --no-restore --verbosity normal
+      - name: Pack for dev
+        if: ${{ github.ref == 'refs/heads/master' }}
+        run: |
+          dotnet pack --no-build --no-restore -o publish -p:PackageVersion=${GITHUB_SHA}
   publish:
     runs-on: ubuntu-latest
     if: ${{ contains(github.ref, 'tags/v') }}
