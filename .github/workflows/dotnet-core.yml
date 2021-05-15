@@ -70,6 +70,9 @@ jobs:
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: 2.1.807
+      - name: Add nuget source
+        run: |
+          dotnet nuget add source --username USERNAME --password ${{ github.token }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/kuju63/index.json"
       - name: Restore cache
         uses: actions/cache@v2
         with:
@@ -87,3 +90,6 @@ jobs:
           API_KEY: ${{ secrets.NUGET_API_EKY }}
         run: |
           dotnet nuget push "publish/StringExtension.${{steps.tag_name.outputs.SOURCE_TAG}}.nupkg" -k "$API_KEY" -s https://api.nuget.org/v3/index.json
+      - name: Publish to GitHub Packages
+        run: |
+          dotnet nuget push "publish/StringExtension.${{steps.tag_name.outputs.SOURCE_TAG}}.nupkg" --api-key ${{ github.token }} --source "github"
