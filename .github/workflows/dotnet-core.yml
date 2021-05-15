@@ -62,7 +62,7 @@ jobs:
           dotnet-version: 2.1.807
       - name: Add nuget source
         run: |
-          dotnet nuget add source --username USERNAME --password ${{ github.token }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/kuju63/index.json"
+          dotnet nuget add source --username kuju63 --password ${{ github.token }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/kuju63/index.json"
       - name: Restore cache
         uses: actions/cache@v2
         with:
